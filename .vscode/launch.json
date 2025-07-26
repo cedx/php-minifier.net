@@ -1,0 +1,20 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Program",
+			"preLaunchTask": "Debug",
+			"request": "launch",
+			"type": "coreclr",
+			"program": "${workspaceFolder}/bin/Belin.PhpMinifier.dll",
+			"args": ["${input:input}"]
+		}
+	],
+	"inputs": [
+		{
+			"description": "The path to the input directory.",
+			"id": "input",
+			"type": "promptString"
+		}
+	]
+}
