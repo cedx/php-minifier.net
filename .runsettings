@@ -1,0 +1,10 @@
+<RunSettings>
+	<MSTest>
+		<Parallelize>
+			<Scope>MethodLevel</Scope>
+		</Parallelize>
+	</MSTest>
+	<RunConfiguration>
+		<ResultsDirectory>var</ResultsDirectory>
+	</RunConfiguration>
+</RunSettings>
