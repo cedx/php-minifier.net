@@ -3,7 +3,7 @@ namespace Belin.PhpMinifier;
 /// <summary>
 /// Removes comments and whitespace from a PHP script.
 /// </summary>
-public interface ITransformer: IDisposable {
+public interface ITransformer: IAsyncDisposable {
 
 	/// <summary>
 	/// Processes a PHP script.
