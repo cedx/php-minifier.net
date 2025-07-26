@@ -10,5 +10,5 @@ public interface ITransformer: IAsyncDisposable {
 	/// </summary>
 	/// <param name="file">The path to the PHP script.</param>
 	/// <returns>The transformed script.</returns>
-	string Transform(string file);
+	Task<string> Transform(string file);
 }
