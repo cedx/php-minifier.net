@@ -10,17 +10,17 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	/// <summary>
 	/// The path to the input directory.
 	/// </summary>
-	private readonly Argument<DirectoryInfo> inputArgument = new("input") {
+	private readonly Argument<DirectoryInfo> inputArgument = new Argument<DirectoryInfo>("input") {
 		Description = "The path to the input directory."
-	};
+	}.AcceptExistingOnly();
 
 	/// <summary>
 	/// The path to the output directory.
 	/// </summary>
-	private readonly Argument<DirectoryInfo?> outputArgument = new("output") {
+	private readonly Argument<DirectoryInfo?> outputArgument = new Argument<DirectoryInfo?>("output") {
 		DefaultValueFactory = _ => null,
 		Description = "The path to the output directory."
-	};
+	}.AcceptLegalFilePathsOnly();
 
 	/// <summary>
 	/// The path to the PHP executable.
@@ -47,10 +47,17 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	}.AcceptOnlyFromAmong(["fast", "safe"]);
 
 	/// <summary>
+	/// Value indicating whether to process the input directory recursively.
+	/// </summary>
+	private readonly Option<bool> recursiveOption = new("--recursive", ["-r"]) {
+		Description = "Whether to process the input directory recursively."
+	};
+
+	/// <summary>
 	/// Value indicating whether to silence the minifier output.
 	/// </summary>
-	private readonly Option<string> silentOption = new("--silent", ["-s"]) {
-		Description = "Value indicating whether to silence the minifier output."
+	private readonly Option<bool> silentOption = new("--silent", ["-s"]) {
+		Description = "Whether to silence the minifier output."
 	};
 
 	/// <summary>
@@ -62,6 +69,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 		Options.Add(binaryOption);
 		Options.Add(extensionOption);
 		Options.Add(modeOption);
+		Options.Add(recursiveOption);
 		Options.Add(silentOption);
 		SetAction(InvokeAsync);
 	}
@@ -72,10 +80,24 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	/// <param name="parseResult">The results of parsing the command line input.</param>
 	/// <param name="cancellationToken">The token to cancel the operation.</param>
 	/// <returns>The exit code.</returns>
-	public Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken) {
+	public async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken) {
+		var binary = parseResult.GetRequiredValue(binaryOption);
 		var input = parseResult.GetRequiredValue(inputArgument);
-		var output = parseResult.GetValue(outputArgument);
-		Console.WriteLine(output);
-		return Task.FromResult(0);
+		var output = parseResult.GetValue(outputArgument) ?? input;
+		var silent = parseResult.GetValue(silentOption);
+		ITransformer transformer = parseResult.GetRequiredValue(modeOption) == "fast" ? new FastTransformer(binary) : new SafeTransformer(binary);
+
+		var searchOption = parseResult.GetValue(recursiveOption) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+		foreach (var file in input.EnumerateFiles($"*.{parseResult.GetRequiredValue(extensionOption)}", searchOption)) {
+			var relativePath = Path.GetRelativePath(input.FullName, file.FullName);
+			if (!silent) Console.WriteLine("Minifying: {0}", relativePath);
+
+			var script = await transformer.Transform(file.FullName);
+			var target = Path.Join(output.FullName, relativePath);
+			Directory.CreateDirectory(Path.GetDirectoryName(target)!); // TODO try to remove the non-null assertion (i.e. "!")
+			await File.WriteAllTextAsync(target, script, cancellationToken);
+		}
+
+		return 0;
 	}
 }
