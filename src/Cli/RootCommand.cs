@@ -85,7 +85,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 		var input = parseResult.GetRequiredValue(inputArgument);
 		var output = parseResult.GetValue(outputArgument) ?? input;
 		var silent = parseResult.GetValue(silentOption);
-		ITransformer transformer = parseResult.GetRequiredValue(modeOption) == "fast" ? new FastTransformer(binary) : new SafeTransformer(binary);
+		using ITransformer transformer = parseResult.GetRequiredValue(modeOption) == "fast" ? new FastTransformer(binary) : new SafeTransformer(binary);
 
 		var searchOption = parseResult.GetValue(recursiveOption) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 		foreach (var file in input.EnumerateFiles($"*.{parseResult.GetRequiredValue(extensionOption)}", searchOption)) {
@@ -94,7 +94,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 
 			var script = await transformer.Transform(file.FullName);
 			var target = Path.Join(output.FullName, relativePath);
-			Directory.CreateDirectory(Path.GetDirectoryName(target)!); // TODO try to remove the non-null assertion (i.e. "!")
+			if (Path.GetDirectoryName(target) is string folder) Directory.CreateDirectory(folder);
 			await File.WriteAllTextAsync(target, script, cancellationToken);
 		}
 
