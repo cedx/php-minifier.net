@@ -10,18 +10,26 @@ using System.Threading.Tasks;
 public sealed class SafeTransformer(string executable = "php"): ITransformer {
 
 	/// <summary>
-	/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+	/// Releases any resources associated with this object.
 	/// </summary>
-	public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+	public void Dispose() {}
 
 	/// <summary>
 	/// Processes a PHP script.
 	/// </summary>
 	/// <param name="file">The path to the PHP script.</param>
 	/// <returns>The transformed script.</returns>
+	/// <exception cref="ProcessException">An error occurred when starting the PHP process.</exception>
 	public async Task<string> Transform(string file) {
-		var process = Process.Start(executable);
+		var startInfo = new ProcessStartInfo(executable, ["-w", Path.GetFullPath(file)]) {
+			CreateNoWindow = true,
+			RedirectStandardOutput = true
+		};
+
+		using var process = Process.Start(startInfo) ?? throw new ProcessException(startInfo.FileName);
+		var standardOutput = process.StandardOutput.ReadToEnd().Trim();
 		await process.WaitForExitAsync();
-		return string.Empty;
+		if (process.ExitCode != 0) throw new ProcessException(startInfo.FileName, $"The PHP process failed with exit code {process.ExitCode}.");
+		return standardOutput;
 	}
 }
