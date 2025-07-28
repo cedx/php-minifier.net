@@ -10,7 +10,7 @@ public sealed class FastTransformerTest {
 
 	[TestMethod]
 	public async Task Listen() {
-		// It should not reject, even if called several times.
+		// It should not throw, even if called several times.
 		using var transformer = new FastTransformer();
 		await That.DoesNotThrowAsync<Exception>(transformer.Listen);
 		await That.DoesNotThrowAsync<Exception>(transformer.Listen);
