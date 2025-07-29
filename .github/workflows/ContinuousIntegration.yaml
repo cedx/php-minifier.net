@@ -18,4 +18,6 @@ jobs:
           extensions: curl, intl, mbstring, simplexml
           php-version: latest
       - name: Run tests
-        run: dotnet test
+        uses: cake-build/cake-action@v3
+        with:
+          target: test
