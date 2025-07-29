@@ -8,10 +8,10 @@ using System.CommandLine;
 internal class RootCommand: System.CommandLine.RootCommand {
 
 	/// <summary>
-	/// The path to the input directory.
+	/// The path to the input file or directory.
 	/// </summary>
-	private readonly Argument<DirectoryInfo> inputArgument = new Argument<DirectoryInfo>("input") {
-		Description = "The path to the input directory."
+	private readonly Argument<FileSystemInfo> inputArgument = new Argument<FileSystemInfo>("input") {
+		Description = "The path to the input file or directory."
 	}.AcceptExistingOnly();
 
 	/// <summary>
@@ -82,14 +82,21 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	/// <returns>The exit code.</returns>
 	public async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken) {
 		var binary = parseResult.GetRequiredValue(binaryOption);
-		var input = parseResult.GetRequiredValue(inputArgument);
-		var output = parseResult.GetValue(outputArgument) ?? input;
-		var silent = parseResult.GetValue(silentOption);
 		using ITransformer transformer = parseResult.GetRequiredValue(modeOption) == "fast" ? new FastTransformer(binary) : new SafeTransformer(binary);
 
+		var input = parseResult.GetRequiredValue(inputArgument);
 		var searchOption = parseResult.GetValue(recursiveOption) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-		foreach (var file in input.EnumerateFiles($"*.{parseResult.GetRequiredValue(extensionOption)}", searchOption)) {
-			var relativePath = Path.GetRelativePath(input.FullName, file.FullName);
+		var files = input switch {
+			DirectoryInfo directory => directory.EnumerateFiles($"*.{parseResult.GetRequiredValue(extensionOption)}", searchOption),
+			FileInfo file => [file],
+			_ => []
+		};
+
+		var output = parseResult.GetValue(outputArgument) ?? (input is FileInfo fileInfo ? fileInfo.Directory! : input);
+		var silent = parseResult.GetValue(silentOption);
+
+		foreach (var file in files) {
+			var relativePath = input is FileInfo ? file.Name : Path.GetRelativePath(input.FullName, file.FullName);
 			if (!silent) Console.WriteLine("Minifying: {0}", relativePath);
 
 			var script = await transformer.Transform(file.FullName);
