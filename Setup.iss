@@ -1,7 +1,7 @@
 #define executable "Belin.PhpMinifier.exe"
 #define publisher "Belin.io"
 #define name "PHP Minifier"
-#define version "1.0.0"
+#define version "1.0.0-rc1"
 
 [Setup]
 AppCopyright = © Cédric Belin
