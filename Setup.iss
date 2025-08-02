@@ -1,34 +1,33 @@
-#define executable "Belin.PhpMinifier.exe"
+#define module "PhpMinifier"
 #define publisher "Belin.io"
-#define name "PHP Minifier"
 #define version "1.0.0-rc2"
 
 [Setup]
 AppCopyright = © Cédric Belin
 AppId = {{62ED0A18-FE14-4012-B2CB-A3C8E6240C91}
-AppName = {#name}
+AppName = PHP Minifier
 AppPublisher = {#publisher}
 AppPublisherURL = https://belin.io
 AppVersion = {#version}
 ArchitecturesAllowed = x64compatible
 ArchitecturesInstallIn64BitMode = x64compatible
 ChangesEnvironment = yes
-DefaultDirName = {autopf}\{#publisher}\PhpMinifier
+DefaultDirName = {autopf}\{#publisher}\{#module}
 DisableProgramGroupPage = yes
 LicenseFile = License.md
-OutputBaseFilename = {#name} {#version}
+OutputBaseFilename = phpminifier-{#version}
 OutputDir = var
 PrivilegesRequired = lowest
 PrivilegesRequiredOverridesAllowed = dialog
 SetupIconFile = src\Program.ico
 SolidCompression = yes
-UninstallDisplayIcon = {app}\lib\{#executable}
+UninstallDisplayIcon = {app}\lib\Belin.{#module}.exe
 WizardStyle = modern
 
 [Files]
 Source: "*.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\*"; DestDir: "{app}\lib"; Excludes: "*.pdb"; Flags: ignoreversion recursesubdirs
-Source: "www\*"; DestDir: "{app}\www"; Excludes: "*.pdb"; Flags: ignoreversion recursesubdirs
+Source: "www\*"; DestDir: "{app}\www"; Flags: ignoreversion recursesubdirs
 
 [Tasks]
 Name: addProgramToPath; Description: "Add the program to the PATH environment variable"
