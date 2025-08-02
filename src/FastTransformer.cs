@@ -25,6 +25,7 @@ public sealed class FastTransformer(string executable = "php"): ITransformer {
 	/// </summary>
 	public void Dispose() {
 		httpClient?.Dispose();
+		httpClient = null;
 		process?.Kill();
 		process?.Dispose();
 		process = null;
