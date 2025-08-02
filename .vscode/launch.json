@@ -6,7 +6,7 @@
 			"preLaunchTask": "Debug",
 			"request": "launch",
 			"type": "coreclr",
-			"program": "${workspaceFolder}/lib/Belin.PhpMinifier.dll",
+			"program": "${workspaceFolder}/bin/Belin.PhpMinifier.dll",
 			"args": ["${input:input}"]
 		}
 	],
