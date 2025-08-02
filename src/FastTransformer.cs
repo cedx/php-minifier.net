@@ -42,8 +42,8 @@ public sealed class FastTransformer(string executable = "php"): ITransformer {
 		var args = new[] { "-S", $"{IPAddress.Loopback}:{port}", "-t", Path.Join(AppContext.BaseDirectory, "../www") };
 		var startInfo = new ProcessStartInfo(executable, args) { CreateNoWindow = true };
 
-		process = Process.Start(startInfo) ?? throw new ProcessException(startInfo.FileName);
 		httpClient = new HttpClient { BaseAddress = new($"http://{IPAddress.Loopback}:{port}/") };
+		process = Process.Start(startInfo) ?? throw new ProcessException(startInfo.FileName);
 		await Task.Delay(1_000);
 		return port;
 	}
