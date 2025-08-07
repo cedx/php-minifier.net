@@ -41,10 +41,10 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	/// <summary>
 	/// The operation mode of the minifier.
 	/// </summary>
-	private readonly Option<string> modeOption = new Option<string>("--mode", ["-m"]) {
-		DefaultValueFactory = _ => "safe",
+	private readonly Option<TransformMode> modeOption = new("--mode", ["-m"]) {
+		DefaultValueFactory = _ => TransformMode.Safe,
 		Description = "The operation mode of the minifier."
-	}.AcceptOnlyFromAmong(["fast", "safe"]);
+	};
 
 	/// <summary>
 	/// Value indicating whether to process the input directory recursively.
@@ -82,7 +82,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	/// <returns>The exit code.</returns>
 	public async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken) {
 		var binary = parseResult.GetRequiredValue(binaryOption);
-		using ITransformer transformer = parseResult.GetRequiredValue(modeOption) == "fast" ? new FastTransformer(binary) : new SafeTransformer(binary);
+		using ITransformer transformer = parseResult.GetRequiredValue(modeOption) == TransformMode.Fast ? new FastTransformer(binary) : new SafeTransformer(binary);
 
 		var input = parseResult.GetRequiredValue(inputArgument);
 		var searchOption = parseResult.GetValue(recursiveOption) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
