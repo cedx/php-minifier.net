@@ -20,7 +20,7 @@
 	<PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<ApplicationIcon>Program.ico</ApplicationIcon>
+		<ApplicationIcon>Cli/Program.ico</ApplicationIcon>
 		<AssemblyName>Belin.PhpMinifier</AssemblyName>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
