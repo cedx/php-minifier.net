@@ -3,7 +3,7 @@ using System;
 using System.IO;
 
 // Choose an appropriate transformer.
-using ITransformer transformer = Environment.GetEnvironmentVariable("PHPMINIFIER_MODE") == "fast"
+using ITransformer transformer = Environment.GetEnvironmentVariable("PHPMINIFIER_MODE") == "Fast"
 	? new FastTransformer()
 	: new SafeTransformer();
 
