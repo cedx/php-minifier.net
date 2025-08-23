@@ -1,5 +1,5 @@
 #define module "PhpMinifier"
-#define publisher "Belin.io"
+#define publisher "Cedric-Belin.fr"
 #define version "1.0.0-rc2"
 
 [Setup]
