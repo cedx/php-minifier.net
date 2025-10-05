@@ -2,7 +2,4 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-
-$commandPath = Get-Item $PSCommandPath
-$scriptRoot = $commandPath.LinkType ? (Split-Path $commandPath.LinkTarget) : $PSScriptRoot
-& dotnet "$scriptRoot/bin/Belin.PhpMinifier.dll" @args
+& dotnet "$PSScriptRoot/bin/Belin.PhpMinifier.dll" @args
