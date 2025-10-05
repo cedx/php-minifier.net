@@ -17,7 +17,5 @@ jobs:
           coverage: none
           extensions: curl, intl, mbstring, simplexml
           php-version: latest
-      - name: Install dependencies
-        run: dotnet tool restore
       - name: Run tests
-        run: dotnet cake --target=test
+        run: ./run.ps1 Test
