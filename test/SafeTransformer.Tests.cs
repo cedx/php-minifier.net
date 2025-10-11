@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 /// Tests the features of the <see cref="SafeTransformer"/> class.
 /// </summary>
 [TestClass]
-public sealed class SafeTransformerTest {
+public sealed class SafeTransformerTests {
 
 	[TestMethod]
 	public async Task Transform() {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 /// Tests the features of the <see cref="FastTransformer"/> class.
 /// </summary>
 [TestClass]
-public sealed class FastTransformerTest {
+public sealed class FastTransformerTests {
 
 	[TestMethod]
 	public async Task Listen() {
