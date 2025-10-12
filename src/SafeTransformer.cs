@@ -27,7 +27,7 @@ public sealed class SafeTransformer(string executable = "php"): ITransformer {
 		};
 
 		using var process = Process.Start(startInfo) ?? throw new ProcessException(startInfo.FileName);
-		var standardOutput = process.StandardOutput.ReadToEnd().Trim();
+		var standardOutput = process.StandardOutput.ReadToEnd();
 		await process.WaitForExitAsync();
 		if (process.ExitCode != 0) throw new ProcessException(startInfo.FileName, $"The PHP process failed with exit code {process.ExitCode}.");
 		return standardOutput;
