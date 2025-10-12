@@ -56,7 +56,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	/// <summary>
 	/// Value indicating whether to process the input directory recursively.
 	/// </summary>
-	private readonly Option<bool> recursiveOption = new("--recursive", ["-r"]) {
+	private readonly Option<bool> recurseOption = new("--recurse", ["-r"]) {
 		Description = "Whether to process the input directory recursively."
 	};
 
@@ -70,7 +70,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 		Options.Add(extensionOption);
 		Options.Add(modeOption);
 		Options.Add(quietOption);
-		Options.Add(recursiveOption);
+		Options.Add(recurseOption);
 		SetAction(InvokeAsync);
 	}
 
@@ -85,7 +85,7 @@ internal class RootCommand: System.CommandLine.RootCommand {
 		using ITransformer transformer = parseResult.GetRequiredValue(modeOption) == TransformMode.Fast ? new FastTransformer(binary) : new SafeTransformer(binary);
 
 		var input = parseResult.GetRequiredValue(inputArgument);
-		var searchOption = parseResult.GetValue(recursiveOption) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+		var searchOption = parseResult.GetValue(recurseOption) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 		var files = input switch {
 			DirectoryInfo directory => directory.EnumerateFiles($"*.{parseResult.GetRequiredValue(extensionOption)}", searchOption),
 			FileInfo file => [file],
