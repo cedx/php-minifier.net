@@ -47,17 +47,17 @@ internal class RootCommand: System.CommandLine.RootCommand {
 	};
 
 	/// <summary>
+	/// Value indicating whether to silence the minifier output.
+	/// </summary>
+	private readonly Option<bool> quietOption = new("--quiet", ["-q"]) {
+		Description = "Whether to silence the minifier output."
+	};
+
+	/// <summary>
 	/// Value indicating whether to process the input directory recursively.
 	/// </summary>
 	private readonly Option<bool> recursiveOption = new("--recursive", ["-r"]) {
 		Description = "Whether to process the input directory recursively."
-	};
-
-	/// <summary>
-	/// Value indicating whether to silence the minifier output.
-	/// </summary>
-	private readonly Option<bool> silentOption = new("--silent", ["-s"]) {
-		Description = "Whether to silence the minifier output."
 	};
 
 	/// <summary>
@@ -69,8 +69,8 @@ internal class RootCommand: System.CommandLine.RootCommand {
 		Options.Add(binaryOption);
 		Options.Add(extensionOption);
 		Options.Add(modeOption);
+		Options.Add(quietOption);
 		Options.Add(recursiveOption);
-		Options.Add(silentOption);
 		SetAction(InvokeAsync);
 	}
 
@@ -93,11 +93,11 @@ internal class RootCommand: System.CommandLine.RootCommand {
 		};
 
 		var output = parseResult.GetValue(outputArgument) ?? (input is FileInfo fileInfo ? fileInfo.Directory! : input);
-		var silent = parseResult.GetValue(silentOption);
+		var quiet = parseResult.GetValue(quietOption);
 
 		foreach (var file in files) {
 			var relativePath = input is FileInfo ? file.Name : Path.GetRelativePath(input.FullName, file.FullName);
-			if (!silent) Console.WriteLine("Minifying: {0}", relativePath);
+			if (!quiet) Console.WriteLine("Minifying: {0}", relativePath);
 
 			var script = await transformer.Transform(file.FullName);
 			var target = Path.Join(output.FullName, relativePath);
