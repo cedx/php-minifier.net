@@ -56,7 +56,7 @@ public sealed class FastTransformer(string executable = "php"): ITransformer {
 	/// <returns>The transformed script.</returns>
 	public async Task<string> Transform(string file) {
 		await Listen();
-		return await httpClient!.GetStringAsync($"index.php?file={Uri.EscapeDataString(file)}");
+		return await httpClient!.GetStringAsync($"index.php?file={Uri.EscapeDataString(Path.GetFullPath(file))}");
 	}
 
 	/// <summary>
