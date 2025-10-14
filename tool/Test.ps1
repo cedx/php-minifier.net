@@ -1,2 +1,2 @@
-Write-Output "Running the test suite..."
+"Running the test suite..."
 dotnet test PhpMinifier.slnx --settings=etc/RunSettings.xml
