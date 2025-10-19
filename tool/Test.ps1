@@ -1,2 +1,2 @@
 "Running the test suite..."
-dotnet test PhpMinifier.slnx --settings=etc/RunSettings.xml
+dotnet test --results-directory=var
