@@ -1,1 +1,1 @@
-@{ ModuleVersion = "1.0.0-rc2" }
+@{ ModuleVersion = "1.0.0-rc3" }
