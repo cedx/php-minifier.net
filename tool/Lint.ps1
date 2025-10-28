@@ -1,4 +1,4 @@
 "Performing the static analysis of source code..."
 Import-Module PSScriptAnalyzer
 Invoke-ScriptAnalyzer $PSScriptRoot -Recurse
-Invoke-ScriptAnalyzer PhpMinifier.psd1
+Invoke-ScriptAnalyzer *.psd1
