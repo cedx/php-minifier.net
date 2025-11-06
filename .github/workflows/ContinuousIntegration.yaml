@@ -22,4 +22,4 @@ jobs:
           extensions: curl, intl, mbstring, simplexml
           php-version: latest
       - name: Run tests
-        run: ./invoke.ps1 Test
+        run: ./Invoke.ps1 Test
