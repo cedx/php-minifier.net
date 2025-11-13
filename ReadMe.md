@@ -1,5 +1,5 @@
 # PHP Minifier
-![.NET](https://badgen.net/static/.net/%3E%3D8.0/green) ![NuGet](https://badgen.net/nuget/v/Belin.PhpMinifier) ![License](https://badgen.net/static/license/MIT/blue) ![Downloads](https://badgen.net/nuget/dt/Belin.PhpMinifier)
+![.NET](https://badgen.net/static/.net/%3E%3D10.0/green) ![NuGet](https://badgen.net/nuget/v/Belin.PhpMinifier) ![License](https://badgen.net/static/license/MIT/blue) ![Downloads](https://badgen.net/nuget/dt/Belin.PhpMinifier)
 
 Minify [PHP](https://www.php.net) source code by removing comments and whitespace.  
 Based on the [`php_strip_whitespace()`](https://www.php.net/manual/en/function.php-strip-whitespace.php) function.
