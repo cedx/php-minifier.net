@@ -35,6 +35,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.CommandLine" Version="2.*-*" />
+		<PackageReference Include="System.CommandLine" Version="2.*" />
 	</ItemGroup>
 </Project>
