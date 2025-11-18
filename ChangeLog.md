@@ -1,8 +1,5 @@
 # Changelog
 
-## Version [1.1.0](https://github.com/cedx/php-minifier.net/compare/v1.0.1...v1.1.0)
-- Restored support for [.NET](https://dotnet.microsoft.com/en-us) 8.
-
 ## Version [1.0.1](https://github.com/cedx/php-minifier.net/compare/v1.0.0...v1.0.1)
 - Fixed a packaging issue.
 
