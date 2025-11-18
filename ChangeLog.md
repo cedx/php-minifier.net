@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [1.0.0](https://github.com/cedx/php-minifier.net/compare/v1.0.0-rc3...v1.0.0)
+- First stable release.
+
 ## Version [1.0.0-rc3](https://github.com/cedx/php-minifier.net/compare/v1.0.0-rc2...v1.0.0-rc3)
 - Breaking change: renamed the `--recursive` option to `--recurse`.
 - Breaking change: renamed the `--silent` option to `--quiet`.
