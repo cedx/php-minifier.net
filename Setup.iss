@@ -1,6 +1,6 @@
 #define module "PhpMinifier"
 #define publisher "Cedric-Belin.fr"
-#define version "1.0.1"
+#define version "1.1.0"
 
 [Setup]
 AppCopyright = © Cédric Belin
