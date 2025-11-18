@@ -1,7 +1,7 @@
 # Changelog
 
 ## Version [1.0.1](https://github.com/cedx/php-minifier.net/compare/v1.0.1...v1.0.1)
-- Fix a packaging issue.
+- Fixed a packaging issue.
 
 ## Version [1.0.0](https://github.com/cedx/php-minifier.net/compare/v1.0.0-rc3...v1.0.0)
 - First stable release.
