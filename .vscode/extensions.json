@@ -2,7 +2,6 @@
 	"recommendations": [
 		"bmewburn.vscode-intelephense-client",
 		"ms-dotnettools.csdevkit",
-		"ms-vscode.powershell",
-		"redhat.vscode-xml"
+		"ms-vscode.powershell"
 	]
 }
