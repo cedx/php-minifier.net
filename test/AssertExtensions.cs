@@ -4,7 +4,7 @@ namespace Belin.PhpMinifier;
 /// Provides extensions members for test assertions.
 /// </summary>
 public static class AssertExtensions {
-	extension(Assert value) {
+	extension(Assert _) {
 
 		/// <summary>
 		/// Asserts that the specified action does not throw an exception of type <typeparamref name="T"/> (or derived type).
