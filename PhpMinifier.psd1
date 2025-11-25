@@ -6,12 +6,6 @@
 	CompanyName = "Cedric-Belin.fr"
 	Copyright = "© Cédric Belin"
 	Description = "Minify PHP source code by removing comments and whitespace."
-	GUID = "282aa573-cfff-4ec8-9f43-883588da9df8"
-
-	AliasesToExport = @()
-	CmdletsToExport = @()
-	FunctionsToExport = @()
-	VariablesToExport = @()
 
 	PrivateData = @{
 		PSData = @{
