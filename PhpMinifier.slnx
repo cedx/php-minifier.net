@@ -41,6 +41,9 @@
 	<Folder Name="/Web/">
 		<File Path="www/index.php" />
 	</Folder>
+	<Folder Name="/Workflows/">
+		<File Path=".github/workflows/ContinuousIntegration.yaml" />
+	</Folder>
 	<Project Path="src/PhpMinifier.csproj" />
 	<Project Path="test/PhpMinifier.Tests.csproj">
 		<Build Solution="Release|*" Project="false" />
