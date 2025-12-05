@@ -19,13 +19,11 @@
 
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<ApplicationIcon>Cli/Program.ico</ApplicationIcon>
 		<AssemblyName>Belin.PhpMinifier</AssemblyName>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../bin</OutDir>
-		<OutputType>Exe</OutputType>
-		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<RootNamespace>Belin.PhpMinifier</RootNamespace>
 		<TargetFramework>net10.0</TargetFramework>
 	</PropertyGroup>
 
