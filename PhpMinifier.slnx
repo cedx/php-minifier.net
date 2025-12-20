@@ -6,7 +6,6 @@
 		<File Path=".runsettings" />
 		<File Path="PhpMinifier.psd1" />
 		<File Path="PSModules.psd1" />
-		<File Path="Setup.iss" />
 	</Folder>
 	<Folder Name="/Documentation/">
 		<File Path="Authors.txt" />
@@ -17,12 +16,13 @@
 	<Folder Name="/Examples/">
 		<File Path="example/TransformPhpFiles.cs" />
 	</Folder>
+	<Folder Name="/Examples/Cmdlets/" />
 	<Folder Name="/Resources/">
 		<File Path="res/Sample.php" />
 	</Folder>
 	<Folder Name="/Scripts/">
+		<File Path="Debug.ps1" />
 		<File Path="Invoke.ps1" />
-		<File Path="Start.ps1" />
 	</Folder>
 	<Folder Name="/Scripts/Tools/">
 		<File Path="tool/Build.ps1" />
