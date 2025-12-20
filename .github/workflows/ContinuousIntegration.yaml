@@ -21,5 +21,12 @@ jobs:
           coverage: none
           extensions: curl, intl, mbstring, simplexml
           php-version: latest
+      - name: Set up PowerShell
+        shell: bash
+        run: |
+          wget --output-document=var/PowerShell.deb --quiet "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell_7.5.4-1.deb_amd64.deb"
+          sudo apt-get --assume-yes --quiet install ./var/PowerShell.deb
+      - name: Install dependencies
+        run: ./Invoke.ps1 Install
       - name: Run tests
         run: ./Invoke.ps1 Test
