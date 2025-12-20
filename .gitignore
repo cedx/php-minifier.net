@@ -2,5 +2,6 @@
 /.idea/
 /.vs/
 /bin/
-/*/obj/
+/src/*/obj/
+/test/obj/
 /var/

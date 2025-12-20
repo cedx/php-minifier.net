@@ -1,25 +1,34 @@
 ﻿@{
 	DefaultCommandPrefix = "Php"
-	ModuleVersion = "1.0.1"
+	ModuleVersion = "2.0.0"
 	PowerShellVersion = "7.5"
-	RootModule = "bin/Belin.PhpMinifier.dll"
+	RootModule = "bin/Belin.PhpMinifier.Cmdlets.dll"
 
 	Author = "Cédric Belin <cedx@outlook.com>"
 	CompanyName = "Cedric-Belin.fr"
 	Copyright = "© Cédric Belin"
 	Description = "Minify PHP source code by removing comments and whitespace."
-	GUID = "9d3c77bd-4a1d-4531-b9f1-b742c0c46cd8"
+	GUID = "bcbf1848-7f0f-4eac-83c7-c83390f4265c"
 
 	AliasesToExport = @()
-	CmdletsToExport = @()
 	FunctionsToExport = @()
 	VariablesToExport = @()
+
+	CmdletsToExport = @(
+		"New-FastTransformer"
+		"New-SafeTransformer"
+	)
+
+	RequiredAssemblies = @(
+		"bin/Belin.PhpMinifier.dll"
+	)
 
 	PrivateData = @{
 		PSData = @{
 			LicenseUri = "https://github.com/cedx/php-minifier.net/blob/main/License.md"
 			ProjectUri = "https://github.com/cedx/php-minifier.net"
 			ReleaseNotes = "https://github.com/cedx/php-minifier.net/releases"
+			Tags = "compress", "minify", "php"
 		}
 	}
 }
