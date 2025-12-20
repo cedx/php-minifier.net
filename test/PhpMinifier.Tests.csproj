@@ -15,7 +15,7 @@
 		<OutDir>../bin</OutDir>
 		<RootNamespace>Belin.PhpMinifier</RootNamespace>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<TargetFramework>net10.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>

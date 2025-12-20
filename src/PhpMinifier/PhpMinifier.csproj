@@ -24,14 +24,10 @@
 		<Nullable>enable</Nullable>
 		<OutDir>../bin</OutDir>
 		<RootNamespace>Belin.PhpMinifier</RootNamespace>
-		<TargetFramework>net10.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="../ReadMe.md" Pack="true" PackagePath="/" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="System.CommandLine" Version="2.*" />
 	</ItemGroup>
 </Project>
