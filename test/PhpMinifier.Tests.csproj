@@ -21,7 +21,8 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.*" />
 		<PackageReference Include="MSTest" Version="4.*" />
-	  <ProjectReference Include="../src/PhpMinifier.csproj" />
+	  <ProjectReference Include="../src/PhpMinifier/PhpMinifier.csproj" />
+		<ProjectReference Include="../src/PhpMinifier.Cmdlets/PhpMinifier.Cmdlets.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

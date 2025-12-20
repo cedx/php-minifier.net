@@ -33,7 +33,6 @@
 		<File Path="tool/Lint.ps1" />
 		<File Path="tool/Outdated.ps1" />
 		<File Path="tool/Publish.ps1" />
-		<File Path="tool/Setup.ps1" />
 		<File Path="tool/Test.ps1" />
 		<File Path="tool/Update.ps1" />
 		<File Path="tool/Version.ps1" />
@@ -45,7 +44,8 @@
 	<Folder Name="/Workflows/">
 		<File Path=".github/workflows/ContinuousIntegration.yaml" />
 	</Folder>
-	<Project Path="src/PhpMinifier.csproj" />
+	<Project Path="src/PhpMinifier/PhpMinifier.csproj" />
+	<Project Path="src/PhpMinifier.Cmdlets/PhpMinifier.Cmdlets.csproj" />
 	<Project Path="test/PhpMinifier.Tests.csproj">
 		<Build Solution="Release|*" Project="false" />
 	</Project>

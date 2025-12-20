@@ -4,7 +4,7 @@
 		<Copyright>© Cédric Belin</Copyright>
 		<Description>Minify PHP source code by removing comments and whitespace.</Description>
 		<Product>PHP Minifier</Product>
-		<Version>1.0.1</Version>
+		<Version>2.1.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -19,15 +19,22 @@
 
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<AssemblyName>Belin.PhpMinifier</AssemblyName>
+		<AssemblyName>Belin.PhpMinifier.Cmdlets</AssemblyName>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../../bin</OutDir>
-		<RootNamespace>Belin.PhpMinifier</RootNamespace>
+		<RootNamespace>Belin.PhpMinifier.Cmdlets</RootNamespace>
 		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="../../ReadMe.md" Pack="true" PackagePath="/" />
+		<PackageReference Include="System.Management.Automation" Version="7.5.*" />
+		<ProjectReference Include="../PhpMinifier/PhpMinifier.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System.Management.Automation" />
 	</ItemGroup>
 </Project>
