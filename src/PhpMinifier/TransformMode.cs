@@ -1,4 +1,4 @@
-namespace Belin.PhpMinifier.Cmdlets;
+namespace Belin.PhpMinifier;
 
 /// <summary>
 /// The operation mode of the minifier.

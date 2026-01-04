@@ -38,9 +38,6 @@
 		<File Path="tool/Version.ps1" />
 		<File Path="tool/Watch.ps1" />
 	</Folder>
-	<Folder Name="/Web/">
-		<File Path="www/index.php" />
-	</Folder>
 	<Folder Name="/Workflows/">
 		<File Path=".github/workflows/ContinuousIntegration.yaml" />
 	</Folder>
