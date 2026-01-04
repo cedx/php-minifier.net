@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 /// <summary>
 /// Tests the features of the <see cref="SafeTransformer"/> class.
 /// </summary>
+/// <param name="testContext">The test context.</param>
 [TestClass]
-public sealed class SafeTransformerTests {
+public sealed class SafeTransformerTests(TestContext testContext) {
 
 	[TestMethod]
 	public async Task Transform() {
@@ -19,6 +20,6 @@ public sealed class SafeTransformerTests {
 
 		var file = Path.Join(AppContext.BaseDirectory, "../res/Sample.php");
 		using var transformer = new SafeTransformer();
-		foreach (var pattern in patterns) Contains(pattern, await transformer.TransformAsync(file));
+		foreach (var pattern in patterns) Contains(pattern, await transformer.TransformAsync(file, testContext.CancellationToken));
 	}
 }

@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 /// <summary>
 /// Tests the features of the <see cref="FastTransformer"/> class.
 /// </summary>
+/// <param name="testContext">The test context.</param>
 [TestClass]
-public sealed class FastTransformerTests {
+public sealed class FastTransformerTests(TestContext testContext) {
 
 	[TestMethod]
 	public async Task Listen() {
 		// It should not throw, even if called several times.
 		using var transformer = new FastTransformer();
-		await That.DoesNotThrowAsync<Exception>(transformer.Listen);
-		await That.DoesNotThrowAsync<Exception>(transformer.Listen);
+		await That.DoesNotThrowAsync<Exception>(() => transformer.Listen(testContext.CancellationToken));
+		await That.DoesNotThrowAsync<Exception>(() => transformer.Listen(testContext.CancellationToken));
 	}
 
 	[TestMethod]
@@ -27,6 +28,6 @@ public sealed class FastTransformerTests {
 
 		var file = Path.Join(AppContext.BaseDirectory, "../res/Sample.php");
 		using var transformer = new FastTransformer();
-		foreach (var pattern in patterns) Contains(pattern, await transformer.TransformAsync(file));
+		foreach (var pattern in patterns) Contains(pattern, await transformer.TransformAsync(file, testContext.CancellationToken));
 	}
 }
