@@ -15,8 +15,8 @@
 	VariablesToExport = @()
 
 	CmdletsToExport = @(
-		"New-FastTransformer"
-		"New-SafeTransformer"
+		"Compress-Script"
+		"New-Transformer"
 	)
 
 	RequiredAssemblies = @(

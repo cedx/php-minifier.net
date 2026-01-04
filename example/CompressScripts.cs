@@ -17,7 +17,7 @@ foreach (var file in files) {
 	var relativePath = Path.GetRelativePath(input.FullName, file.FullName);
 	Console.WriteLine("Minifying: {0}", relativePath);
 
-	var script = await transformer.Transform(file.FullName);
+	var script = await transformer.TransformAsync(file.FullName);
 	var target = Path.Join(output.FullName, relativePath);
 	if (Path.GetDirectoryName(target) is string folder) Directory.CreateDirectory(folder);
 	await File.WriteAllTextAsync(target, script);

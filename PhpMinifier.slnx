@@ -14,9 +14,11 @@
 		<File Path="ReadMe.md" />
 	</Folder>
 	<Folder Name="/Examples/">
-		<File Path="example/TransformPhpFiles.cs" />
+		<File Path="example/CompressScripts.cs" />
 	</Folder>
-	<Folder Name="/Examples/Cmdlets/" />
+	<Folder Name="/Examples/Cmdlets/">
+		<File Path="example/Cmdlets/Compress-Script.ps1" />
+	</Folder>
 	<Folder Name="/Resources/">
 		<File Path="res/Sample.php" />
 	</Folder>
