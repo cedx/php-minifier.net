@@ -27,6 +27,6 @@ public sealed class FastTransformerTests {
 
 		var file = Path.Join(AppContext.BaseDirectory, "../res/Sample.php");
 		using var transformer = new FastTransformer();
-		foreach (var pattern in patterns) Contains(pattern, await transformer.Transform(file));
+		foreach (var pattern in patterns) Contains(pattern, await transformer.TransformAsync(file));
 	}
 }

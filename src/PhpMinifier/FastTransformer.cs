@@ -1,6 +1,7 @@
 namespace Belin.PhpMinifier;
 
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
 
@@ -30,33 +31,43 @@ public sealed class FastTransformer(string executable = "php"): ITransformer {
 		process?.Dispose();
 		process = null;
 	}
-
-	/// <summary>
-	/// Starts the underlying PHP process and begins accepting connections.
-	/// </summary>
-	/// <returns>The TCP port used by the PHP process.</returns>
-	/// <exception cref="ProcessException">An error occurred when starting the PHP process.</exception>
-	public async Task<int> Listen() {
-		if (process is not null) return httpClient!.BaseAddress!.Port;
-
-		var port = GetPort();
-		var arguments = new[] { "-S", $"{IPAddress.Loopback}:{port}", "-t", Path.Join(AppContext.BaseDirectory, "../www") };
-		var startInfo = new ProcessStartInfo(executable, arguments) { CreateNoWindow = true };
-
-		httpClient = new HttpClient { BaseAddress = new($"http://{IPAddress.Loopback}:{port}/") };
-		process = Process.Start(startInfo) ?? throw new ProcessException(startInfo.FileName);
-		await Task.Delay(1_000);
-		return port;
-	}
-
+	
 	/// <summary>
 	/// Processes a PHP script.
 	/// </summary>
 	/// <param name="file">The path to the PHP script.</param>
 	/// <returns>The transformed script.</returns>
-	public async Task<string> Transform(string file) {
-		await Listen();
-		return await httpClient!.GetStringAsync($"index.php?file={Uri.EscapeDataString(Path.GetFullPath(file))}");
+	public string Transform(string file) => TransformAsync(file, CancellationToken.None).GetAwaiter().GetResult();
+
+	/// <summary>
+	/// Processes a PHP script.
+	/// </summary>
+	/// <param name="file">The path to the PHP script.</param>
+	/// <param name="cancellationToken">The token to cancel the operation.</param>
+	/// <returns>The transformed script.</returns>
+	public async Task<string> TransformAsync(string file, CancellationToken cancellationToken = default) {
+		await Listen(cancellationToken);
+		return await httpClient.GetStringAsync($"PhpMinifier.php?file={Uri.EscapeDataString(Path.GetFullPath(file))}", cancellationToken);
+	}
+
+	/// <summary>
+	/// Starts the underlying PHP process and begins accepting connections.
+	/// </summary>
+	/// <returns>The TCP port used by the PHP process.</returns>
+	/// <param name="cancellationToken">The token to cancel the operation.</param>
+	/// <exception cref="ProcessException">An error occurred when starting the PHP process.</exception>
+	[MemberNotNull(nameof(httpClient), nameof(process))]
+	internal async Task<int> Listen(CancellationToken cancellationToken = default) {
+		if (process is not null) return httpClient!.BaseAddress!.Port;
+
+		var port = GetPort();
+		var arguments = new[] { "-S", $"{IPAddress.Loopback}:{port}", "-t", Path.GetDirectoryName(GetType().Assembly.Location)! };
+		var startInfo = new ProcessStartInfo(executable, arguments) { CreateNoWindow = true };
+
+		httpClient = new HttpClient { BaseAddress = new($"http://{IPAddress.Loopback}:{port}/") };
+		process = Process.Start(startInfo) ?? throw new ProcessException(startInfo.FileName);
+		await Task.Delay(1_000, cancellationToken);
+		return port;
 	}
 
 	/// <summary>
