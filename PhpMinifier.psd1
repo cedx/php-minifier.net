@@ -1,4 +1,4 @@
-﻿@{
+@{
 	DefaultCommandPrefix = "Php"
 	ModuleVersion = "2.0.0"
 	PowerShellVersion = "7.5"
@@ -28,7 +28,7 @@
 			LicenseUri = "https://github.com/cedx/php-minifier.net/blob/main/License.md"
 			ProjectUri = "https://github.com/cedx/php-minifier.net"
 			ReleaseNotes = "https://github.com/cedx/php-minifier.net/releases"
-			Tags = "compress", "minify", "php"
+			Tags = "ci", "compress", "minify", "php"
 		}
 	}
 }

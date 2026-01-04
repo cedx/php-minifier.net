@@ -7,7 +7,7 @@ using ITransformer transformer = Environment.GetEnvironmentVariable("PHPMINIFIER
 	? new FastTransformer()
 	: new SafeTransformer();
 
-// Scan the input directory for PHP files.
+// Scan the input directory for PHP scripts.
 var input = new DirectoryInfo("path/to/source/folder");
 var files = input.EnumerateFiles("*.php", SearchOption.AllDirectories);
 
