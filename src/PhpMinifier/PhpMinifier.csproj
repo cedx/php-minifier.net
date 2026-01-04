@@ -4,7 +4,7 @@
 		<Copyright>© Cédric Belin</Copyright>
 		<Description>Minify PHP source code by removing comments and whitespace.</Description>
 		<Product>PHP Minifier</Product>
-		<Version>1.0.1</Version>
+		<Version>2.0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -12,7 +12,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-		<PackageTags>compress;minify;php</PackageTags>
+		<PackageTags>ci;compress;minify;php</PackageTags>
 		<RepositoryUrl>https://github.com/cedx/php-minifier.net.git</RepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
@@ -28,8 +28,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="PhpMinifier.php" CopyToOutputDirectory="Always" /> <!-- TODO check if the file is really packed into the NuGet package -->
+		<Content Include="PhpMinifier.php" CopyToOutputDirectory="Always" PackageCopyToOutput="true" />
 		<InternalsVisibleTo Include="$(AssemblyName).Tests" />
-		<None Include="../../ReadMe.md" Pack="true" PackagePath="/" />
+		<None Include="../../ReadMe.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 		<Copyright>© Cédric Belin</Copyright>
 		<Description>Minify PHP source code by removing comments and whitespace.</Description>
 		<Product>PHP Minifier</Product>
-		<Version>2.1.0</Version>
+		<Version>2.0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -12,7 +12,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadMe.md</PackageReadmeFile>
-		<PackageTags>compress;minify;php</PackageTags>
+		<PackageTags>ci;compress;minify;php</PackageTags>
 		<RepositoryUrl>https://github.com/cedx/php-minifier.net.git</RepositoryUrl>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
@@ -29,7 +29,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="../../ReadMe.md" Pack="true" PackagePath="/" />
+		<None Include="../../ReadMe.md" Pack="true" PackagePath="" />
 		<PackageReference Include="System.Management.Automation" Version="7.5.*" />
 		<ProjectReference Include="../PhpMinifier/PhpMinifier.csproj" />
 	</ItemGroup>
