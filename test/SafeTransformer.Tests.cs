@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public sealed class SafeTransformerTests(TestContext testContext) {
 
 	[TestMethod]
-	public async Task Transform() {
+	public async Task TransformAsync() {
 		var patterns = new[] {
 			"<?= 'Hello World!' ?>", // It should remove the inline comments.
 			"namespace dummy; class Dummy", // It should remove the multi-line comments.
