@@ -9,15 +9,18 @@ using System.Threading.Tasks;
 [TestClass]
 public sealed class SafeTransformerTests(TestContext testContext) {
 
+	/// <summary>
+	/// The patterns tested to determine if minification is OK.
+	/// </summary>
+	private readonly string[] patterns = [
+		"<?= 'Hello World!' ?>",
+		"namespace dummy; class Dummy",
+		"$className = get_class($this); return $className;",
+		"__construct() { $this->property"
+	];
+
 	[TestMethod]
 	public async Task TransformAsync() {
-		var patterns = new[] {
-			"<?= 'Hello World!' ?>", // It should remove the inline comments.
-			"namespace dummy; class Dummy", // It should remove the multi-line comments.
-			"$className = get_class($this); return $className;", // It should remove the single-line comments.
-			"__construct() { $this->property" // It should remove the whitespace.
-		};
-
 		var file = Path.Join(AppContext.BaseDirectory, "../res/Sample.php");
 		using var transformer = new SafeTransformer();
 		foreach (var pattern in patterns) Contains(pattern, await transformer.TransformAsync(file, testContext.CancellationToken));

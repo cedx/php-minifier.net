@@ -5,7 +5,12 @@ namespace Belin.PhpMinifier;
 /// </summary>
 /// <param name="mode">The operation mode of the minifier.</param>
 /// <param name="executable">The path to the PHP executable.</param>
-public class PhpMinifier(TransformMode mode = TransformMode.Safe, string executable = "php") {
+public class PhpMinifier(TransformMode mode = TransformMode.Safe, string executable = "php"): IDisposable {
+
+	/// <summary>
+	/// TODO
+	/// </summary>
+	private readonly ITransformer transformer = mode == TransformMode.Fast ? new FastTransformer(executable) : new SafeTransformer(executable);
 
 	/// <summary>
 	/// TODO
@@ -43,12 +48,19 @@ public class PhpMinifier(TransformMode mode = TransformMode.Safe, string executa
 			_ => []
 		};
 
-		using ITransformer transformer = mode == TransformMode.Fast ? new FastTransformer(executable) : new SafeTransformer(executable);
 		foreach (var file in files) {
 			var script = await transformer.TransformAsync(file.FullName, cancellationToken);
 			var target = Path.Join(output.FullName, input is FileInfo ? file.Name : Path.GetRelativePath(input.FullName, file.FullName));
 			if (Path.GetDirectoryName(target) is string folder) Directory.CreateDirectory(folder);
 			await File.WriteAllTextAsync(target, script, cancellationToken);
 		}
+	}
+
+	/// <summary>
+	/// Releases any resources associated with this object.
+	/// </summary>
+	public void Dispose() {
+		transformer.Dispose();
+		GC.SuppressFinalize(this);
 	}
 }
