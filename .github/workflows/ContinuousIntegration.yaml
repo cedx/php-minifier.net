@@ -7,7 +7,7 @@ defaults:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Fetch sources
         uses: actions/checkout@v6
@@ -22,10 +22,11 @@ jobs:
           extensions: curl, intl, mbstring, simplexml
           php-version: latest
       - name: Set up PowerShell
-        shell: bash
         run: |
-          wget --output-document=var/PowerShell.deb --quiet "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/powershell_7.5.4-1.deb_amd64.deb"
-          sudo apt-get --assume-yes --quiet install ./var/PowerShell.deb
+          Push-Location var
+          Invoke-WebRequest "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.msi" -OutFile PowerShell.msi
+          msiexec -norestart -package PowerShell.msi -quiet
+          Pop-Location
       - name: Install dependencies
         run: ./Invoke.ps1 Install
       - name: Run tests
