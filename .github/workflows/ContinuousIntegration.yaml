@@ -23,10 +23,9 @@ jobs:
           php-version: latest
       - name: Set up PowerShell
         run: |
-          Push-Location var
-          Invoke-WebRequest "https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.msi" -OutFile PowerShell.msi
-          msiexec -norestart -package PowerShell.msi -quiet
-          Pop-Location
+          Invoke-WebRequest "https://aka.ms/install-powershell.ps1" -OutFile Install-PowerShell.ps1
+          ./Install-PowerShell.ps1
+          Add-Content "$Env:GITHUB_PATH" "$Env:LOCALAPPDATA\Microsoft\powershell"
       - name: Install dependencies
         run: ./Invoke.ps1 Install
       - name: Run tests
